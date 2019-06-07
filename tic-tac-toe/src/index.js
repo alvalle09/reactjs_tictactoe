@@ -3,26 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 
-class Square extends React.Component {
-    // Squaer no longer hold stete
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         value: null,
-    //     };
-    // }
-
-    render() {
+function Square(props) {
       return (
         <button className="square" 
-        onClick={() => {
-            this.props.onClick()
-            }
-        }>
-          {this.props.value}
+                onClick={ props.onClick } >
+          {props.value}
         </button>
       );
-    }
   }
   
 class Board extends React.Component {
@@ -33,6 +20,13 @@ class Board extends React.Component {
             squares: Array(9).fill(null),
         };
     }
+
+    handleClick(i) {
+        const squares = this.state.squares.slice();
+        squares[i] = 'X';
+        this.setState({squares: squares});
+    }
+
 
     // render based on state squares array
     renderSquare(i) {
