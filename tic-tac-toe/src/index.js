@@ -6,7 +6,7 @@ import './index.css';
 function Square(props) {
       return (
         <button className="square" 
-                onClick={ props.onClick } >
+                onClick={props.onClick}>
           {props.value}
         </button>
       );
@@ -18,13 +18,18 @@ class Board extends React.Component {
         // set state to an array of 9 filled with nulls
         this.state = {
             squares: Array(9).fill(null),
+            // set default first player as X
+            xIsNext: true, 
         };
     }
 
-    handleClick(i) {
+    handleClick(i) {        
         const squares = this.state.squares.slice();
-        squares[i] = 'X';
-        this.setState({squares: squares});
+        squares[i] = this.state.xIsNext ? 'X' : 'O';
+        this.setState({
+            squares: squares,
+            xIsNext: !this.state.xIsNext,
+        });
     }
 
 
